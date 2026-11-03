@@ -19,7 +19,7 @@ desc: |
 version: 1.4.0
 author: qianwangshengpaerna
 repo: https://github.com/qianwangshengpaerna/astrobot-plugin-astro-painter
-astrbot_version: ">=4.14.0,<5"
+astrbot_version: ">=4.14.0"
 support_platforms:
   - aiocqhttp
   - qq_official
@@ -39,4 +39,8 @@ tags:
   - 文生图
   - 图生图
   - 图像生成
+  - image
+  - text-to-image
+  - image-generation
+  - drawing
 social_link: https://github.com/qianwangshengpaerna
