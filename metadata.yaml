@@ -1,0 +1,42 @@
+name: astrbot_plugin_astro_painter
+display_name: AstroPainter 生图
+short_desc: 接任一生图模型，对话模型当画师先构思再出图
+desc: |
+  给 AstrBot 接上任一生图模型（OpenAI Images 协议 / Chat Completions 协议均可），只做静态图片。
+
+  三种触发方式，保证「想画图」不会漏：
+  - 自然语言：说「帮我画一只橘猫」「生成一张赛博朋克风的海报」直接出图
+  - 指令：/画图、/生图、/draw、/画画
+  - 带图改图：先发一张图，再说「改成水彩风格」，走图生图
+
+  画师模式：由对话模型先构思画面，输出结构化提示词再交给生图模型。
+  人格可设为有主见的插画师，三档主动性可选，会记住上一张画。
+  对话模型超时或报错时自动退回原话出图，连续失败会熔断。
+
+  成本控制：画布默认压在 720p 以内，额度池默认每天 5 张，
+  作用范围可选全站 / 每群 / 每人；另有冷却、并发上限、
+  多 Key 轮换、429/5xx 重试。完全不依赖 function calling 也能用。
+version: 1.4.0
+author: qianwangshengpaerna
+repo: https://github.com/qianwangshengpaerna/astrbot_plugin_astro_painter
+astrbot_version: ">=4.14.0,<5"
+support_platforms:
+  - aiocqhttp
+  - qq_official
+  - telegram
+  - wecom
+  - lark
+  - dingtalk
+  - discord
+  - slack
+  - kook
+  - satori
+  - misskey
+  - line
+tags:
+  - 生图
+  - AI绘画
+  - 文生图
+  - 图生图
+  - 图像生成
+social_link: https://github.com/qianwangshengpaerna

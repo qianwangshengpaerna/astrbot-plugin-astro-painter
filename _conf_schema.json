@@ -1,0 +1,222 @@
+{
+  "api_mode": {
+    "type": "string",
+    "description": "接口协议",
+    "options": [
+      "images",
+      "chat"
+    ],
+    "labels": [
+      "OpenAI Images 协议（推荐）",
+      "Chat Completions 协议"
+    ],
+    "default": "images",
+    "hint": "多数厂商（OpenAI、硅基流动、智谱、one-api 中转）用 images；Gemini 兼容层或只暴露对话接口的聚合站用 chat。"
+  },
+  "base_url": {
+    "type": "string",
+    "description": "接口地址",
+    "default": "https://api.openai.com/v1",
+    "obvious_hint": true,
+    "hint": "通常以 /v1 结尾，插件会自动拼 /images/generations、/images/edits 或 /chat/completions。"
+  },
+  "api_key": {
+    "type": "string",
+    "description": "API Key",
+    "default": "",
+    "secret": true,
+    "obvious_hint": true
+  },
+  "extra_keys": {
+    "type": "text",
+    "description": "备用 API Key",
+    "default": "",
+    "hint": "一行一个（或逗号分隔）。遇到 429/5xx 会自动轮换到下一个 Key。"
+  },
+  "model": {
+    "type": "string",
+    "description": "模型名",
+    "default": "gpt-image-1",
+    "obvious_hint": true,
+    "hint": "填厂商文档里的准确模型 ID，例如 gpt-image-1、flux-schnell、cogview-4、gemini-3-pro-image-preview。"
+  },
+  "prompt_engine": {
+    "type": "string",
+    "description": "提示词引擎",
+    "default": "astrbot",
+    "options": [
+      "astrbot",
+      "custom",
+      "off"
+    ],
+    "obvious_hint": true,
+    "hint": "astrbot = 用 AstrBot 里已配好的对话模型来构思提示词（推荐）；custom = 单独填一套对话 API；off = 不构思，用户原话直接出图。"
+  },
+  "artist_level": {
+    "type": "string",
+    "description": "画师主动性",
+    "default": "balanced",
+    "options": [
+      "obedient",
+      "balanced",
+      "assertive"
+    ],
+    "obvious_hint": true,
+    "hint": "obedient = 严格照做，只补细节；balanced = 风格构图由它定，但不改你要的东西；assertive = 它是主导者，可以改变构图和风格，只保留你点名的主体和用途。"
+  },
+  "artist_persona": {
+    "type": "string",
+    "description": "画师人格描述",
+    "default": "有个人风格的插画师",
+    "hint": "会拼进系统提示词：「你是一位{这里填的}」。可填「偏爱胶片质感的街头摄影师」「做暗黑奇幻设定的概念设计师」。"
+  },
+  "remember_last": {
+    "type": "bool",
+    "description": "记住上一张画",
+    "default": true,
+    "hint": "开启后，同一个用户再画时，画师知道自己上次画了什么，可以延续或刻意换风格。"
+  },
+  "llm_provider_id": {
+    "type": "string",
+    "description": "指定对话模型 ID",
+    "default": "",
+    "hint": "只在「提示词引擎 = astrbot」时生效。留空表示用当前默认对话模型；填 AstrBot 提供商页里的 ID 可指定，例如 deepseek。"
+  },
+  "llm_base_url": {
+    "type": "string",
+    "description": "对话接口地址（custom 用）",
+    "default": "https://api.deepseek.com/v1",
+    "hint": "兼容 OpenAI Chat Completions 的地址，末尾带 /v1。"
+  },
+  "llm_api_key": {
+    "type": "string",
+    "description": "对话 API Key（custom 用）",
+    "default": "",
+    "hint": "和生图的 Key 是两回事，可以填同一家的更便宜的模型。"
+  },
+  "llm_model": {
+    "type": "string",
+    "description": "对话模型名（custom 用）",
+    "default": "deepseek-chat"
+  },
+  "llm_temperature": {
+    "type": "float",
+    "description": "构思温度",
+    "default": 0.7,
+    "hint": "0.5~0.9 比较合适。太低会写得很死板，太高会跑题。"
+  },
+  "llm_timeout": {
+    "type": "int",
+    "description": "构思超时（秒）",
+    "default": 25,
+    "hint": "超时立刻退回原话出图，不会让用户一直等。"
+  },
+  "show_thought": {
+    "type": "bool",
+    "description": "展示构思过程",
+    "default": false,
+    "hint": "开启后，/画图 会先把模型的想法发出来再出图。群聊里建议关，避免刷屏。"
+  },
+  "prompt_suffix": {
+    "type": "string",
+    "description": "固定追加词（规则模式）",
+    "default": "",
+    "hint": "引擎关闭或降级时，给原话固定追加质量词，例如：电影级质感, 超清细节, 35mm。"
+  },
+  "size": {
+    "type": "string",
+    "description": "默认尺寸",
+    "default": "720x720",
+    "hint": "用户没有说横竖屏时使用。格式 宽x高。建议不超过 1280x720。"
+  },
+  "size_square": {
+    "type": "string",
+    "description": "方图尺寸",
+    "default": "720x720"
+  },
+  "size_landscape": {
+    "type": "string",
+    "description": "横屏尺寸",
+    "default": "1280x720",
+    "hint": "用户说「横屏 / 16:9 / banner」时使用。"
+  },
+  "size_portrait": {
+    "type": "string",
+    "description": "竖屏尺寸",
+    "default": "720x1280",
+    "hint": "用户说「竖屏 / 9:16 / 手机壁纸」时使用。"
+  },
+  "max_canvas": {
+    "type": "string",
+    "description": "画布上限",
+    "default": "1280x720",
+    "obvious_hint": true,
+    "hint": "输出图片会等比缩放到不超过这个尺寸，默认 720p。模型返回大图也压到上限内。填 off 关闭。"
+  },
+  "timeout": {
+    "type": "int",
+    "description": "单次请求超时（秒）",
+    "default": 180,
+    "hint": "生图一般 15–60 秒。"
+  },
+  "max_retries": {
+    "type": "int",
+    "description": "失败重试次数",
+    "default": 2,
+    "hint": "只对 429、5xx、网络超时重试，参数错误不会重试（避免白花钱）。"
+  },
+  "cooldown_seconds": {
+    "type": "int",
+    "description": "单用户冷却（秒）",
+    "default": 20,
+    "hint": "防止连点扣费。设为 0 关闭。"
+  },
+  "max_concurrent": {
+    "type": "int",
+    "description": "全局最大并发",
+    "default": 2,
+    "hint": "同时在跑的生成任务数，超出会排队。"
+  },
+  "daily_quota": {
+    "type": "int",
+    "description": "每人每日额度（张）",
+    "default": 0,
+    "hint": "针对单个用户的额外限制，0 表示不单独限制。与额度池同时生效，取更严的那个。"
+  },
+  "quota_scope": {
+    "type": "string",
+    "description": "额度池作用范围",
+    "default": "site",
+    "options": [
+      "site",
+      "group",
+      "user"
+    ],
+    "hint": "site = 整个机器人每天共 N 张（所有群一起用）；group = 每个群各自 N 张，私聊单独算；user = 每个用户各自 N 张，跨群累计。"
+  },
+  "global_daily_quota": {
+    "type": "int",
+    "description": "每日额度池大小（张）",
+    "default": 5,
+    "obvious_hint": true,
+    "hint": "配合上面的作用范围使用。默认全站每天共 5 张；把作用范围改成 group，就变成每个群每天 5 张。0 表示不限。"
+  },
+  "auto_detect": {
+    "type": "bool",
+    "description": "自动识别画图意图",
+    "default": true,
+    "hint": "开启后不需要加指令，「帮我画只猫」会直接出图；关闭则只响应 /画图 和 LLM 工具调用。"
+  },
+  "extra_trigger_words": {
+    "type": "string",
+    "description": "额外触发词",
+    "default": "",
+    "hint": "逗号分隔。命中即视为画图请求，例如：出图,画一张,来张图。"
+  },
+  "reply_with_prompt": {
+    "type": "bool",
+    "description": "图片附带提示词",
+    "default": true,
+    "hint": "开启后图片上方会带一行提示词，方便用户复制调整。"
+  }
+}
