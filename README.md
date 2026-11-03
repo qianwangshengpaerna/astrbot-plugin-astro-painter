@@ -41,7 +41,7 @@ AstrBot WebUI → 插件 → 插件市场 → 搜索 `AstroPainter` → 安装 �
 
 ```bash
 cd AstrBot/data/plugins
-git clone https://github.com/qianwangshengpaerna/astrbot_plugin_astro_painter
+git clone https://github.com/qianwangshengpaerna/astrobot-plugin-astro-painter
 ```
 
 安装后在插件卡片上点齿轮配置，填 `base_url`、`api_key`、`model` 即可。

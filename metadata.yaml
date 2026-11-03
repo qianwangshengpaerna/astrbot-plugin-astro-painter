@@ -18,7 +18,7 @@ desc: |
   多 Key 轮换、429/5xx 重试。完全不依赖 function calling 也能用。
 version: 1.4.0
 author: qianwangshengpaerna
-repo: https://github.com/qianwangshengpaerna/astrbot_plugin_astro_painter
+repo: https://github.com/qianwangshengpaerna/astrobot-plugin-astro-painter
 astrbot_version: ">=4.14.0,<5"
 support_platforms:
   - aiocqhttp
